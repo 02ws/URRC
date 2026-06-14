@@ -1,0 +1,59 @@
+{
+  "name": "gems-xiaoxiaole",
+  "version": "1.0.0",
+  "description": "缤纷消消乐 - WinUI 3 风格桌面游戏",
+  "main": "main.js",
+  "author": "Gems Game Studio",
+  "license": "MIT",
+  "keywords": ["electron", "winui3", "game", "match3", "xiaoxiaole"],
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --enable-logging",
+    "build": "npx electron-builder --win --x64",
+    "build-portable": "npx electron-builder --win portable --x64",
+    "build-nsis": "npx electron-builder --win nsis --x64"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.gems.xiaoxiaole",
+    "productName": "消消乐",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "xiaoxiaole.html",
+      "icon.png",
+      "icon-256.png",
+      "icon.ico"
+    ],
+    "asar": true,
+    "win": {
+      "icon": "icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "消消乐",
+      "deleteAppDataOnUninstall": false,
+      "differentialPackage": true
+    }
+  }
+}

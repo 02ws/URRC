@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Gems · 消消乐 (WinUI 3)</title>
+<style>
+  /* ==================== WinUI 3 / Fluent Design System ==================== */
+  :root {
+    /* Fluent 系统色 - Windows 11 */
+    --fluent-blue: #0078D4;
+    --fluent-blue-light: #1a88e0;
+    --fluent-blue-dark: #005a9e;
+    
+    /* Fluent 强调色 */
+    --fluent-red: #C42B1C;
+    --fluent-green: #107C10;
+    --fluent-orange: #D83B01;
+    --fluent-yellow: #F7B500;
+    --fluent-purple: #8764B8;
+    --fluent-pink: #E3008C;
+    --fluent-teal: #038387;
+    
+    /* Fluent 灰阶 */
+    --fluent-gray-20: #F9F9F9;
+    --fluent-gray-30: #F3F3F3;
+    --fluent-gray-40: #EBEBEB;
+    --fluent-gray-50: #E0E0E0;
+    --fluent-gray-60: #D2D2D2;
+    --fluent-gray-70: #C9C9C9;
+    --fluent-gray-80: #BFBFBF;
+    --fluent-gray-90: #A7A7A7;
+    --fluent-gray-100: #8A8A8A;
+    --fluent-gray-110: #767676;
+    --fluent-gray-120: #616161;
+    --fluent-gray-130: #484848;
+    --fluent-gray-140: #323232;
+    --fluent-gray-150: #292929;
+    --fluent-gray-160: #202020;
+    --fluent-gray-170: #141414;
+    
+    /* Mica 材质变量 */
+    --mica-base: #F3F3F3;
+    --mica-alt: #E8E8EC;
+    
+    /* 文字色 */
+    --text-primary: rgba(0, 0, 0, 0.89);
+    --text-secondary: rgba(0, 0, 0, 0.61);
+    --text-tertiary: rgba(0, 0, 0, 0.45);
+    --text-disabled: rgba(0, 0, 0, 0.29);
+    --text-on-accent: #FFFFFF;
+    --text-on-accent-secondary: rgba(255, 255, 255, 0.85);
+    
+    /* 边框 */
+    --card-border: rgba(0, 0, 0, 0.06);
+    --card-border-strong: rgba(0, 0, 0, 0.12);
+    --divider: rgba(0, 0, 0, 0.06);
+    
+    /* Fluent 圆角 (默认 8px) */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    
+    /* Fluent 阴影 Elevation */
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+    --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-4: 0 4px 8px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.06);
+    --shadow-8: 0 8px 16px rgba(0, 0, 0, 0.1), 0 8px 32px rgba(0, 0, 0, 0.08);
+    --shadow-16: 0 16px 32px rgba(0, 0, 0, 0.12), 0 16px 48px rgba(0, 0, 0, 0.1);
+    --shadow-focus: 0 0 0 2px rgba(0, 120, 212, 0.35);
+    
+    /* 宝石色 - Fluent Accent */
+    --gem-red: #E8485C;
+    --gem-blue: #1890F1;
+    --gem-green: #108937;
+    --gem-orange: #EA4300;
+    --gem-purple: #8764B8;
+    --gem-pink: #E3008C;
+
+    /* 按钮背景 (浅色模式) */
+    --button-bg: #FBFBFB;
+    --button-bg-hover: #F5F5F5;
+    --button-bg-active: #EBEBEB;
+    --card-bg: #FFFFFF;
+    --board-bg: #FFFFFF;
+    --board-grid-bg: #F3F3F3;
+  }
+
+  /* ==================== 深色主题 ==================== */
+  [data-theme="dark"] {
+    --mica-base: #202020;
+    --mica-alt: #1B1B1B;
+
+    --text-primary: rgba(255, 255, 255, 0.92);
+    --text-secondary: rgba(255, 255, 255, 0.70);
+    --text-tertiary: rgba(255, 255, 255, 0.52);
+    --text-disabled: rgba(255, 255, 255, 0.30);
+    --text-on-accent: #FFFFFF;
+    --text-on-accent-secondary: rgba(255, 255, 255, 0.85);
+
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-border-strong: rgba(255, 255, 255, 0.14);
+    --divider: rgba(255, 255, 255, 0.08);
+
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.30), 0 1px 3px rgba(0, 0, 0, 0.15);
+    --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.20);
+    --shadow-4: 0 4px 8px rgba(0, 0, 0, 0.40), 0 4px 16px rgba(0, 0, 0, 0.25);
+    --shadow-8: 0 8px 16px rgba(0, 0, 0, 0.45), 0 8px 32px rgba(0, 0, 0, 0.30);
+    --shadow-16: 0 16px 32px rgba(0, 0, 0, 0.50), 0 16px 48px rgba(0, 0, 0, 0.35);
+    --shadow-focus: 0 0 0 2px rgba(120, 185, 255, 0.40);
+
+    --button-bg: #2B2B2B;
+    --button-bg-hover: #353535;
+    --button-bg-active: #3E3E3E;
+    --card-bg: #2B2B2B;
+    --board-bg: #2B2B2B;
+    --board-grid-bg: #1B1B1B;
+  }
+
+  /* ==================== 基础重置 ==================== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  html, body {
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: 'Segoe UI Variable', 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', -apple-system, sans-serif;
+    background: var(--mica-base);
+    color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ==================== WinUI 3 应用窗口 - 填充整个视口 ==================== */
+  .winui-window {
+    width: 100%;
+    height: 100vh;
+    background: var(--mica-base);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    border-radius: 0;
+  }
+
+  /* ==================== 已移除模拟标题栏 - 使用 Electron 原生窗口 ==================== */
+
+  /* ==================== 内容区 (Page) - flex 填充 ==================== */
+  .page-content {
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0 20px 12px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ==================== Page Header (页面头) - Win11 风格 ==================== */
+  .page-header {
+    padding: 18px 0 12px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .page-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .page-header-title {
+    flex: 1;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.2px;
+    line-height: 1;
+  }
+
+  .page-header-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ==================== Win11 菜单按钮 ==================== */
+  .fluent-menu-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    border: 1px solid var(--card-border);
+    background: var(--button-bg);
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 400;
+    font-family: inherit;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .fluent-menu-button:hover {
+    background: var(--button-bg-hover);
+    border-color: var(--card-border-strong);
+  }
+
+  .fluent-menu-button:active {
+    background: var(--button-bg-active);
+    border-color: var(--card-border-strong);
+  }
+
+  .fluent-menu-button.active {
+    background: var(--button-bg-active);
+    border-color: var(--card-border-strong);
+  }
+
+  /* ==================== Win11 Menu Dropdown (弹出菜单) ==================== */
+  .fluent-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 4px;
+    min-width: 180px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    box-shadow: var(--shadow-4);
+    padding: 4px;
+    z-index: 1000;
+    display: none;
+    animation: menu-fade-in 0.15s cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+
+  .fluent-menu-dropdown.show {
+    display: block;
+  }
+
+  @keyframes menu-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-primary);
+    transition: background 0.1s;
+    user-select: none;
+  }
+
+  .menu-item:hover {
+    background: var(--button-bg-hover);
+  }
+
+  .menu-item:active {
+    background: var(--button-bg-active);
+  }
+
+  .menu-icon {
+    font-size: 14px;
+    width: 16px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .menu-text {
+    flex: 1;
+  }
+
+  .menu-divider {
+    height: 1px;
+    background: var(--divider);
+    margin: 4px 8px;
+  }
+
+  /* ==================== Fluent Card (卡片) - Win11 原生风格 ==================== */
+  .fluent-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 12px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .fluent-card.score-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+  }
+
+  /* ==================== 分数区 ==================== */
+  .score-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+
+  .score-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  /* WinUI InfoBadge */
+  .info-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 8px;
+    background: var(--fluent-blue);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 10px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .score-value {
+    font-size: 40px;
+    font-weight: 300;
+    color: var(--text-primary);
+    letter-spacing: -1.5px;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 8px;
+  }
+
+  /* ==================== Fluent ProgressBar (进度条) ==================== */
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: var(--text-tertiary);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--fluent-blue);
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.5s cubic-bezier(0.1, 0.9, 0.2, 1);
+    position: relative;
+  }
+
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  /* ==================== Fluent Stat Cards (状态卡) ==================== */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+  }
+
+  .stat-item {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 10px 8px;
+    text-align: center;
+    transition: background 0.15s;
+    cursor: default;
+  }
+
+  .stat-icon-box {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+  }
+
+  .stat-icon-box.blue { background: #1890F1; }
+  .stat-icon-box.orange { background: #EA4300; }
+  .stat-icon-box.green { background: #107C10; }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .stat-value {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+  }
+
+  /* ==================== Fluent Board (游戏板) - Win11 风格 ==================== */
+  .board-card {
+    background: var(--board-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 10px;
+    position: relative;
+    margin-bottom: 0;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+  }
+
+  .board-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .board-subtitle {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 400;
+  }
+
+  .game-board {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 4px;
+    aspect-ratio: 1;
+    max-width: 100%;
+    margin: 0 auto;
+    background: var(--board-grid-bg);
+    border-radius: 6px;
+    padding: 8px;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  /* ==================== Fluent Gems (宝石) - 简洁风格 ==================== */
+  .gem {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    color: white;
+    transition: transform 0.15s cubic-bezier(0.1, 0.9, 0.2, 1);
+    animation: gem-enter 0.35s cubic-bezier(0.1, 0.9, 0.2, 1) backwards;
+  }
+
+  @keyframes gem-enter {
+    from {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .gem:active {
+    transform: scale(0.9);
+    transition-duration: 0.1s;
+  }
+
+  .gem.selected {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.4);
+    z-index: 10;
+    animation: selected-pulse 1s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
+  }
+
+  @keyframes selected-pulse {
+    0%, 100% { transform: scale(1.15); }
+    50% { transform: scale(1.2); }
+  }
+
+  .gem.matching {
+    animation: match-explode 0.5s cubic-bezier(0.5, 0, 0.75, 0) forwards;
+  }
+
+  @keyframes match-explode {
+    0% {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+    }
+    40% {
+      transform: scale(1.35) rotate(-10deg);
+      opacity: 1;
+      filter: brightness(1.4);
+    }
+    100% {
+      transform: scale(0) rotate(360deg);
+      opacity: 0;
+      filter: brightness(2);
+    }
+  }
+
+  .gem.hint {
+    animation: hint-highlight 1.2s cubic-bezier(0.1, 0.9, 0.2, 1) infinite;
+  }
+
+  @keyframes hint-highlight {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: none;
+    }
+    50% {
+      transform: scale(1.1);
+      box-shadow: 0 0 0 3px rgba(247, 181, 0, 0.6);
+    }
+  }
+
+  .gem.invalid-shake {
+    animation: shake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+  }
+
+  /* 宝石类型 - Fluent 强调色 */
+  .gem-red { background: var(--gem-red); }
+  .gem-blue { background: var(--gem-blue); }
+  .gem-green { background: var(--gem-green); }
+  .gem-orange { background: var(--gem-orange); }
+  .gem-purple { background: var(--gem-purple); }
+  .gem-pink { background: var(--gem-pink); }
+
+  /* ==================== 连击显示 (Combo) ==================== */
+  .combo-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--fluent-blue);
+    letter-spacing: -2px;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .combo-display.active {
+    animation: combo-pop 0.9s cubic-bezier(0.1, 0.9, 0.2, 1);
+  }
+
+  @keyframes combo-pop {
+    0% {
+      transform: translate(-50%, -50%) scale(0.5);
+      opacity: 0;
+    }
+    30% {
+      transform: translate(-50%, -50%) scale(1.3);
+      opacity: 1;
+    }
+    70% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(0.8) translateY(-20px);
+      opacity: 0;
+    }
+  }
+
+  /* ==================== 飞出分数 ==================== */
+  .floating-score {
+    position: absolute;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--fluent-blue);
+    pointer-events: none;
+    z-index: 40;
+    font-variant-numeric: tabular-nums;
+    animation: float-up 1s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+  }
+
+  @keyframes float-up {
+    0% {
+      transform: translateY(0) scale(0.7);
+      opacity: 0;
+    }
+    20% {
+      transform: translateY(-10px) scale(1.15);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-60px) scale(1);
+      opacity: 0;
+    }
+  }
+
+  /* ==================== WinUI 3 CommandBar (底部命令栏) - Win11 风格 ==================== */
+  .command-bar {
+    background: var(--mica-base);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 8px 20px calc(8px + env(safe-area-inset-bottom, 0px));
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ==================== Fluent Button (按钮) - Win11 风格 ==================== */
+  .fluent-button {
+    flex: 1;
+    height: 32px;
+    padding: 0 14px;
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    background: var(--button-bg);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .fluent-button:hover {
+    background: var(--button-bg-hover);
+    border-color: var(--card-border-strong);
+  }
+
+  .fluent-button:active {
+    background: var(--button-bg-active);
+    border-color: var(--card-border-strong);
+  }
+
+  .fluent-button.primary {
+    background: var(--fluent-blue);
+    color: var(--text-on-accent);
+    border: 1px solid var(--fluent-blue);
+  }
+
+  .fluent-button.primary:hover {
+    background: var(--fluent-blue-light);
+    border-color: var(--fluent-blue-light);
+  }
+
+  .fluent-button.primary:active {
+    background: var(--fluent-blue-dark);
+    border-color: var(--fluent-blue-dark);
+  }
+
+  .button-icon {
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  /* ==================== ContentDialog (内容对话框) - Win11 风格 ==================== */
+  .dialog-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 24px;
+    animation: dialog-fade-in 0.2s ease;
+  }
+
+  .dialog-overlay.active {
+    display: flex;
+  }
+
+  @keyframes dialog-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .content-dialog {
+    background: var(--card-bg);
+    border-radius: 8px;
+    box-shadow: var(--shadow-16);
+    width: 100%;
+    max-width: 340px;
+    overflow: hidden;
+    animation: dialog-scale-in 0.3s cubic-bezier(0.1, 0.9, 0.2, 1);
+    border: 1px solid var(--card-border);
+  }
+
+  @keyframes dialog-scale-in {
+    from {
+      transform: translateY(16px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .dialog-icon-row {
+    padding: 28px 24px 0;
+    text-align: center;
+  }
+
+  .dialog-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+  }
+
+  .dialog-icon.success {
+    background: #107C10;
+  }
+
+  .dialog-icon.fail {
+    background: #D83B01;
+  }
+
+  .dialog-icon.info {
+    background: #0078D4;
+  }
+
+  .dialog-content {
+    padding: 20px 24px 20px;
+    text-align: center;
+  }
+
+  .dialog-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .dialog-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    white-space: pre-line;
+  }
+
+  .dialog-score {
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--fluent-blue);
+    letter-spacing: -1.5px;
+    margin: 4px 0;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .dialog-commands {
+    padding: 12px 24px 24px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+  }
+
+  .dialog-commands .fluent-button {
+    flex: none;
+    height: 32px;
+    padding: 0 16px;
+    font-size: 13px;
+    min-width: 100px;
+  }
+
+  /* ==================== (移除响应式 - Electron 窗口固定尺寸) ==================== */
+</style>
+</head>
+<body>
+
+<!-- WinUI 3 应用窗口 -->
+<div class="winui-window">
+
+  <!-- 页面内容 (Page) -->
+  <div class="page-content">
+    
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="page-header-row">
+        <button class="fluent-menu-button" id="menu-btn" aria-label="菜单">≡</button>
+        <div class="page-header-title" data-i18n="app.title">消消乐</div>
+        <div class="page-header-right">
+          <button class="fluent-menu-button" onclick="toggleThemeQuick()" id="quick-theme-btn" title="切换主题 / Theme">
+            <span id="quick-theme-icon">☀</span>
+          </button>
+          <button class="fluent-menu-button" onclick="toggleLanguage()" id="quick-lang-btn" title="切换语言 / Language">
+            <span id="quick-lang-icon">🌐</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 下拉菜单 -->
+      <div class="fluent-menu-dropdown" id="menu-dropdown">
+        <div class="menu-item" onclick="game.restart()">
+          <span class="menu-icon">↺</span>
+          <span class="menu-text" data-i18n="menu.restart">重新开始</span>
+        </div>
+        <div class="menu-item" onclick="game.showHint()">
+          <span class="menu-icon">💡</span>
+          <span class="menu-text" data-i18n="menu.hint">显示提示</span>
+        </div>
+        <div class="menu-item" onclick="game.shuffleBoard()">
+          <span class="menu-icon">🔀</span>
+          <span class="menu-text" data-i18n="menu.shuffle">重新排列</span>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" onclick="switchLanguage('zh')">
+          <span class="menu-icon" id="check-zh">✓</span>
+          <span class="menu-text" data-i18n="lang.zh">中文（简体）</span>
+        </div>
+        <div class="menu-item" onclick="switchLanguage('en')">
+          <span class="menu-icon" id="check-en"></span>
+          <span class="menu-text" data-i18n="lang.en">English</span>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" onclick="switchTheme('light')">
+          <span class="menu-icon" id="check-theme-light">✓</span>
+          <span class="menu-text" data-i18n="theme.light">☀ 浅色主题</span>
+        </div>
+        <div class="menu-item" onclick="switchTheme('dark')">
+          <span class="menu-icon" id="check-theme-dark"></span>
+          <span class="menu-text" data-i18n="theme.dark">🌙 深色主题</span>
+        </div>
+        <div class="menu-divider"></div>
+        <div class="menu-item" onclick="game.showAbout()">
+          <span class="menu-icon">ⓘ</span>
+          <span class="menu-text" data-i18n="menu.about">关于</span>
+        </div>
+        <div class="menu-item" onclick="window.close()">
+          <span class="menu-icon">✕</span>
+          <span class="menu-text" data-i18n="menu.close">关闭窗口</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 分数卡片 -->
+    <div class="fluent-card score-card">
+      <div class="score-header">
+        <span class="score-label" data-i18n="score.label">当前分数</span>
+        <span class="info-badge" id="level-badge">关卡 1</span>
+      </div>
+      <div class="score-value" id="score">0</div>
+      <div class="progress-info">
+        <span data-i18n="score.target">目标</span>: <span id="target">1,000</span>
+        <span id="progress-percent">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- 状态统计卡 -->
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-icon-box orange">⚡</div>
+        <div class="stat-label" data-i18n="stats.moves">剩余步数</div>
+        <div class="stat-value" id="moves">30</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon-box blue">🎯</div>
+        <div class="stat-label" data-i18n="stats.matched">消除宝石</div>
+        <div class="stat-value" id="matched">0</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon-box green">🔥</div>
+        <div class="stat-label" data-i18n="stats.combo">最高连击</div>
+        <div class="stat-value" id="best-combo">0x</div>
+      </div>
+    </div>
+
+    <!-- 游戏板卡片 -->
+    <div class="board-card">
+      <div class="board-header">
+        <div class="board-title" data-i18n="board.title">游戏区</div>
+        <div class="board-subtitle" data-i18n="board.size">8 × 8</div>
+      </div>
+      <div class="game-board" id="game-board"></div>
+      <div class="combo-display" id="combo-display"></div>
+    </div>
+
+  </div>
+
+  <!-- 底部命令栏 (CommandBar) -->
+  <div class="command-bar">
+    <button class="fluent-button" onclick="game.showHint()">
+      <span class="button-icon">💡</span>
+      <span data-i18n="btn.hint">提示</span>
+    </button>
+    <button class="fluent-button" onclick="game.shuffleBoard()">
+      <span class="button-icon">🔀</span>
+      <span data-i18n="btn.shuffle">重排</span>
+    </button>
+    <button class="fluent-button primary" onclick="game.restart()">
+      <span class="button-icon">↺</span>
+      <span data-i18n="btn.restart">重新开始</span>
+    </button>
+  </div>
+
+  <!-- ContentDialog (内容对话框) -->
+  <div class="dialog-overlay" id="dialog-overlay">
+    <div class="content-dialog">
+      <div class="dialog-icon-row">
+        <div class="dialog-icon" id="dialog-icon">🏆</div>
+      </div>
+      <div class="dialog-content">
+        <div class="dialog-title" id="dialog-title">关卡通过!</div>
+        <div class="dialog-text" id="dialog-text">做得好！准备迎接下一关。</div>
+        <div class="dialog-score" id="dialog-score" style="display:none;">0</div>
+      </div>
+      <div class="dialog-commands">
+        <button class="fluent-button" id="dialog-close-btn" onclick="game.closeDialog()" data-i18n="btn.close">关闭</button>
+        <button class="fluent-button primary" id="dialog-action-btn" onclick="game.onDialogAction()" data-i18n="btn.next">继续</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ==================== 多语言 (i18n) ==================== */
+const i18n = {
+  zh: {
+    'app.title': '消消乐',
+    'menu.restart': '重新开始',
+    'menu.hint': '显示提示',
+    'menu.shuffle': '重新排列',
+    'menu.about': '关于',
+    'menu.close': '关闭窗口',
+    'lang.zh': '中文（简体）',
+    'lang.en': 'English',
+    'theme.light': '☀ 浅色主题',
+    'theme.dark': '🌙 深色主题',
+    'score.label': '当前分数',
+    'score.target': '目标',
+    'stats.moves': '剩余步数',
+    'stats.matched': '消除宝石',
+    'stats.combo': '最高连击',
+    'board.title': '游戏区',
+    'board.size': '8 × 8',
+    'btn.hint': '提示',
+    'btn.shuffle': '重排',
+    'btn.restart': '重新开始',
+    'btn.close': '关闭',
+    'btn.next': '继续',
+    'btn.ok': '好',
+    'dialog.level.title': '关卡通过!',
+    'dialog.level.text': '做得好！准备迎接下一关。',
+    'dialog.gameover.title': '游戏结束',
+    'dialog.gameover.text': '没有步数了，再试一次？',
+    'dialog.noMoves.title': '无可用移动',
+    'dialog.noMoves.text': '正在自动重排棋盘',
+    'dialog.about.title': '关于',
+    'dialog.about.text': '消消乐 · WinUI 3 风格\n版本 1.0.0\n\n使用 HTML/CSS/JavaScript 开发\n桌面应用由 Electron 驱动',
+    'level.badge': '关卡 {level}'
+  },
+  en: {
+    'app.title': 'Match-3 Game',
+    'menu.restart': 'New Game',
+    'menu.hint': 'Show Hint',
+    'menu.shuffle': 'Shuffle',
+    'menu.about': 'About',
+    'menu.close': 'Close Window',
+    'lang.zh': '中文（简体）',
+    'lang.en': 'English',
+    'theme.light': '☀ Light Theme',
+    'theme.dark': '🌙 Dark Theme',
+    'score.label': 'Score',
+    'score.target': 'Target',
+    'stats.moves': 'Moves Left',
+    'stats.matched': 'Gems Cleared',
+    'stats.combo': 'Best Combo',
+    'board.title': 'Game Board',
+    'board.size': '8 × 8',
+    'btn.hint': 'Hint',
+    'btn.shuffle': 'Shuffle',
+    'btn.restart': 'Restart',
+    'btn.close': 'Close',
+    'btn.next': 'Continue',
+    'btn.ok': 'OK',
+    'dialog.level.title': 'Level Complete!',
+    'dialog.level.text': 'Well done! Ready for the next one.',
+    'dialog.gameover.title': 'Game Over',
+    'dialog.gameover.text': 'Out of moves. Want to try again?',
+    'dialog.noMoves.title': 'No Moves Available',
+    'dialog.noMoves.text': 'Auto shuffling the board...',
+    'dialog.about.title': 'About',
+    'dialog.about.text': 'Match-3 · WinUI 3 Style\nVersion 1.0.0\n\nBuilt with HTML/CSS/JavaScript\nPowered by Electron',
+    'level.badge': 'Level {level}'
+  }
+};
+
+let currentLang = 'zh';
+
+function t(key) {
+  return i18n[currentLang][key] || key;
+}
+
+function switchLanguage(lang) {
+  currentLang = lang;
+  // 更新所有带 data-i18n 的元素
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    el.textContent = t(key);
+  });
+  // 更新语言菜单的勾选状态
+  const zhCheck = document.getElementById('check-zh');
+  const enCheck = document.getElementById('check-en');
+  if (zhCheck) zhCheck.textContent = (lang === 'zh') ? '✓' : '';
+  if (enCheck) enCheck.textContent = (lang === 'en') ? '✓' : '';
+  // 同步更新关卡标签
+  const levelBadge = document.getElementById('level-badge');
+  if (levelBadge && window.game) {
+    levelBadge.textContent = t('level.badge').replace('{level}', window.game.level);
+  }
+  // 关闭菜单
+  closeMenu();
+}
+
+/* ==================== 主题切换 (Theme) ==================== */
+let currentTheme = 'light';
+
+function applyTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+  // 更新菜单勾选状态
+  const checkLight = document.getElementById('check-theme-light');
+  const checkDark = document.getElementById('check-theme-dark');
+  if (checkLight) checkLight.textContent = (theme === 'light') ? '✓' : '';
+  if (checkDark) checkDark.textContent = (theme === 'dark') ? '✓' : '';
+  // 更新快捷按钮图标
+  const themeIcon = document.getElementById('quick-theme-icon');
+  if (themeIcon) themeIcon.textContent = (theme === 'light') ? '☀' : '🌙';
+}
+
+function switchTheme(theme) {
+  currentTheme = theme;
+  applyTheme(theme);
+  closeMenu();
+}
+
+/* 快捷切换：在浅色和深色之间切换 */
+function toggleThemeQuick() {
+  const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+  switchTheme(nextTheme);
+}
+
+/* 底部快捷切换：在中文和英文之间切换 */
+function toggleLanguage() {
+  const nextLang = currentLang === 'zh' ? 'en' : 'zh';
+  switchLanguage(nextLang);
+  // 更新快捷按钮的文字
+  const langText = document.getElementById('lang-text');
+  if (langText) {
+    langText.textContent = nextLang === 'zh' ? '中/EN' : 'EN/中';
+  }
+}
+
+/* ==================== WinUI 3 风格消消乐逻辑 ==================== */
+class MatchThreeGame {
+  constructor() {
+    this.boardSize = 8;
+    this.gemTypes = ['red', 'blue', 'green', 'orange', 'purple', 'pink'];
+    this.gemEmojis = {
+      red: '❤️',
+      blue: '💎',
+      green: '🍀',
+      orange: '⭐',
+      purple: '🔮',
+      pink: '🌸'
+    };
+    this.board = [];
+    this.score = 0;
+    this.level = 1;
+    this.moves = 30;
+    this.matchedCount = 0;
+    this.bestCombo = 0;
+    this.currentCombo = 0;
+    this.targetScore = 1000;
+    this.selectedGem = null;
+    this.isProcessing = false;
+    this.modalAction = null;
+
+    this.initBoard();
+    this.render();
+    this.updateUI();
+  }
+
+  initBoard() {
+    this.board = [];
+    for (let row = 0; row < this.boardSize; row++) {
+      this.board[row] = [];
+      for (let col = 0; col < this.boardSize; col++) {
+        let type;
+        let attempts = 0;
+        do {
+          type = this.gemTypes[Math.floor(Math.random() * this.gemTypes.length)];
+          attempts++;
+        } while (this.createsMatch(row, col, type) && attempts < 50);
+        this.board[row][col] = type;
+      }
+    }
+    if (!this.findPossibleMove()) {
+      this.shuffleBoard(false);
+    }
+  }
+
+  createsMatch(row, col, type) {
+    if (col >= 2 &&
+        this.board[row][col - 1] === type &&
+        this.board[row][col - 2] === type) {
+      return true;
+    }
+    if (row >= 2 &&
+        this.board[row - 1] && this.board[row - 1][col] === type &&
+        this.board[row - 2] && this.board[row - 2][col] === type) {
+      return true;
+    }
+    return false;
+  }
+
+  render() {
+    const boardEl = document.getElementById('game-board');
+    boardEl.innerHTML = '';
+
+    for (let row = 0; row < this.boardSize; row++) {
+      for (let col = 0; col < this.boardSize; col++) {
+        const gem = document.createElement('div');
+        gem.className = `gem gem-${this.board[row][col]}`;
+        gem.textContent = this.gemEmojis[this.board[row][col]];
+        gem.dataset.row = row;
+        gem.dataset.col = col;
+        gem.style.animationDelay = ((row * this.boardSize + col) * 0.005) + 's';
+        gem.addEventListener('click', (e) => this.handleGemClick(row, col, gem));
+        gem.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          this.handleGemClick(row, col, gem);
+        }, { passive: false });
+        boardEl.appendChild(gem);
+      }
+    }
+  }
+
+  handleGemClick(row, col, element) {
+    if (this.isProcessing) return;
+
+    if (this.selectedGem === null) {
+      this.selectedGem = { row, col, element };
+      element.classList.add('selected');
+    } else {
+      const { row: prevRow, col: prevCol, element: prevElement } = this.selectedGem;
+
+      if (prevRow === row && prevCol === col) {
+        element.classList.remove('selected');
+        this.selectedGem = null;
+        return;
+      }
+
+      const isAdjacent = (Math.abs(prevRow - row) === 1 && prevCol === col) ||
+                         (Math.abs(prevCol - col) === 1 && prevRow === row);
+
+      if (isAdjacent) {
+        prevElement.classList.remove('selected');
+        this.selectedGem = null;
+        this.trySwap(prevRow, prevCol, row, col);
+      } else {
+        prevElement.classList.remove('selected');
+        this.selectedGem = { row, col, element };
+        element.classList.add('selected');
+      }
+    }
+  }
+
+  trySwap(r1, c1, r2, c2) {
+    this.swap(r1, c1, r2, c2);
+    this.render();
+
+    const matches = this.findMatches();
+
+    if (matches.length === 0) {
+      setTimeout(() => {
+        this.swap(r1, c1, r2, c2);
+        this.render();
+        const gems = document.querySelectorAll('.gem');
+        gems.forEach(gem => {
+          if (parseInt(gem.dataset.row) === r2 && parseInt(gem.dataset.col) === c2) {
+            gem.classList.add('invalid-shake');
+            setTimeout(() => gem.classList.remove('invalid-shake'), 400);
+          }
+        });
+      }, 250);
+    } else {
+      this.moves--;
+      this.currentCombo = 0;
+      this.updateUI();
+      setTimeout(() => this.processMatches(), 250);
+    }
+  }
+
+  swap(r1, c1, r2, c2) {
+    const temp = this.board[r1][c1];
+    this.board[r1][c1] = this.board[r2][c2];
+    this.board[r2][c2] = temp;
+  }
+
+  findMatches() {
+    const matches = new Set();
+
+    for (let row = 0; row < this.boardSize; row++) {
+      for (let col = 0; col < this.boardSize - 2; col++) {
+        const type = this.board[row][col];
+        if (type && this.board[row][col + 1] === type && this.board[row][col + 2] === type) {
+          let end = col + 2;
+          while (end < this.boardSize - 1 && this.board[row][end + 1] === type) end++;
+          for (let i = col; i <= end; i++) {
+            matches.add(`${row},${i}`);
+          }
+        }
+      }
+    }
+
+    for (let col = 0; col < this.boardSize; col++) {
+      for (let row = 0; row < this.boardSize - 2; row++) {
+        const type = this.board[row][col];
+        if (type && this.board[row + 1][col] === type && this.board[row + 2][col] === type) {
+          let end = row + 2;
+          while (end < this.boardSize - 1 && this.board[end + 1][col] === type) end++;
+          for (let i = row; i <= end; i++) {
+            matches.add(`${i},${col}`);
+          }
+        }
+      }
+    }
+
+    return Array.from(matches).map(pos => {
+      const [row, col] = pos.split(',').map(Number);
+      return { row, col };
+    });
+  }
+
+  processMatches() {
+    this.isProcessing = true;
+    const matches = this.findMatches();
+
+    if (matches.length === 0) {
+      this.isProcessing = false;
+      this.checkGameState();
+      return;
+    }
+
+    this.currentCombo++;
+    if (this.currentCombo > this.bestCombo) {
+      this.bestCombo = this.currentCombo;
+    }
+
+    const gems = document.querySelectorAll('.gem');
+    matches.forEach(({ row, col }) => {
+      gems.forEach(gem => {
+        if (parseInt(gem.dataset.row) === row && parseInt(gem.dataset.col) === col) {
+          gem.classList.add('matching');
+        }
+      });
+    });
+
+    const baseScore = matches.length * 10;
+    const comboBonus = this.currentCombo > 1 ? Math.floor(baseScore * (this.currentCombo - 1) * 0.5) : 0;
+    const gainedScore = baseScore + comboBonus;
+    this.score += gainedScore;
+    this.matchedCount += matches.length;
+
+    if (this.currentCombo > 1) {
+      this.showCombo(this.currentCombo);
+    }
+
+    if (matches.length > 0) {
+      const centerMatch = matches[Math.floor(matches.length / 2)];
+      this.showFloatingScore(centerMatch.row, centerMatch.col, gainedScore);
+    }
+
+    setTimeout(() => {
+      matches.forEach(({ row, col }) => {
+        this.board[row][col] = null;
+      });
+
+      this.applyGravity();
+      this.fillBoard();
+      this.render();
+      this.updateUI();
+
+      setTimeout(() => this.processMatches(), 450);
+    }, 500);
+  }
+
+  applyGravity() {
+    for (let col = 0; col < this.boardSize; col++) {
+      let emptyRow = this.boardSize - 1;
+      for (let row = this.boardSize - 1; row >= 0; row--) {
+        if (this.board[row][col] !== null) {
+          if (row !== emptyRow) {
+            this.board[emptyRow][col] = this.board[row][col];
+            this.board[row][col] = null;
+          }
+          emptyRow--;
+        }
+      }
+    }
+  }
+
+  fillBoard() {
+    for (let row = 0; row < this.boardSize; row++) {
+      for (let col = 0; col < this.boardSize; col++) {
+        if (this.board[row][col] === null) {
+          this.board[row][col] = this.gemTypes[Math.floor(Math.random() * this.gemTypes.length)];
+        }
+      }
+    }
+  }
+
+  showFloatingScore(row, col, score) {
+    const boardEl = document.getElementById('game-board');
+    const cells = boardEl.children;
+    const cellIndex = row * this.boardSize + col;
+
+    if (cells[cellIndex]) {
+      const rect = cells[cellIndex].getBoundingClientRect();
+      const boardRect = boardEl.getBoundingClientRect();
+
+      const floatEl = document.createElement('div');
+      floatEl.className = 'floating-score';
+      floatEl.textContent = '+' + score;
+      floatEl.style.left = (rect.left - boardRect.left + rect.width / 2 - 20) + 'px';
+      floatEl.style.top = (rect.top - boardRect.top + 20) + 'px';
+      boardEl.appendChild(floatEl);
+
+      setTimeout(() => floatEl.remove(), 1100);
+    }
+  }
+
+  showCombo(combo) {
+    const comboEl = document.getElementById('combo-display');
+    comboEl.textContent = combo + 'x';
+    comboEl.classList.remove('active');
+    void comboEl.offsetWidth;
+    comboEl.classList.add('active');
+  }
+
+  findPossibleMove() {
+    for (let row = 0; row < this.boardSize; row++) {
+      for (let col = 0; col < this.boardSize; col++) {
+        if (col < this.boardSize - 1) {
+          this.swap(row, col, row, col + 1);
+          if (this.findMatches().length > 0) {
+            this.swap(row, col, row, col + 1);
+            return { r1: row, c1: col, r2: row, c2: col + 1 };
+          }
+          this.swap(row, col, row, col + 1);
+        }
+        if (row < this.boardSize - 1) {
+          this.swap(row, col, row + 1, col);
+          if (this.findMatches().length > 0) {
+            this.swap(row, col, row + 1, col);
+            return { r1: row, c1: col, r2: row + 1, c2: col };
+          }
+          this.swap(row, col, row + 1, col);
+        }
+      }
+    }
+    return null;
+  }
+
+  showHint() {
+    if (this.isProcessing) return;
+    const move = this.findPossibleMove();
+    if (move) {
+      const gems = document.querySelectorAll('.gem');
+      gems.forEach(gem => {
+        const row = parseInt(gem.dataset.row);
+        const col = parseInt(gem.dataset.col);
+        if ((row === move.r1 && col === move.c1) ||
+            (row === move.r2 && col === move.c2)) {
+          gem.classList.add('hint');
+          setTimeout(() => gem.classList.remove('hint'), 2500);
+        }
+      });
+    } else {
+      this.showDialog('info', t('dialog.noMoves.title'), t('dialog.noMoves.text'), null, null, t('btn.ok'));
+      setTimeout(() => {
+        this.closeDialog();
+        this.shuffleBoard();
+      }, 1200);
+    }
+  }
+
+  showAbout() {
+    this.showDialog('info', t('dialog.about.title'), t('dialog.about.text'), null, null, t('btn.close'), false);
+  }
+
+  shuffleBoard(animate = true) {
+    if (this.isProcessing) return;
+
+    let flat = [];
+    for (let row = 0; row < this.boardSize; row++) {
+      for (let col = 0; col < this.boardSize; col++) {
+        flat.push(this.board[row][col]);
+      }
+    }
+
+    for (let i = flat.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [flat[i], flat[j]] = [flat[j], flat[i]];
+    }
+
+    let idx = 0;
+    for (let row = 0; row < this.boardSize; row++) {
+      for (let col = 0; col < this.boardSize; col++) {
+        this.board[row][col] = flat[idx++];
+      }
+    }
+
+    if (this.findMatches().length > 0) {
+      if (animate) {
+        this.render();
+        setTimeout(() => this.processMatches(), 300);
+        return;
+      }
+    }
+    if (!this.findPossibleMove()) {
+      this.shuffleBoard(animate);
+      return;
+    }
+
+    if (animate) {
+      this.render();
+    }
+  }
+
+  checkGameState() {
+    if (this.score >= this.targetScore) {
+      const nextTarget = Math.floor(this.targetScore * 1.5);
+      const nextLevelBtn = currentLang === 'zh' ? '下一关' : 'Next Level';
+      this.showDialog(
+        'success',
+        currentLang === 'zh' ? `🎉 关卡 ${this.level} 通过!` : `🎉 Level ${this.level} Complete!`,
+        currentLang === 'zh'
+          ? `达到目标分数！准备进入第 ${this.level + 1} 关。`
+          : `Target reached! Get ready for Level ${this.level + 1}.`,
+        null,
+        () => {
+          this.level++;
+          this.targetScore = nextTarget;
+          this.moves += 15;
+          this.shuffleBoard();
+          this.updateUI();
+        },
+        nextLevelBtn
+      );
+      return;
+    }
+
+    if (this.moves <= 0) {
+      const retryBtn = currentLang === 'zh' ? '再来一局' : 'Try Again';
+      this.showDialog(
+        'fail',
+        t('dialog.gameover.title'),
+        currentLang === 'zh'
+          ? `步数已用尽！你消除了 ${this.matchedCount} 个宝石，最高连击 ${this.bestCombo} 次。`
+          : `Out of moves! You cleared ${this.matchedCount} gems with a ${this.bestCombo}x best combo.`,
+        this.score,
+        () => this.restart(),
+        retryBtn
+      );
+      return;
+    }
+
+    if (!this.findPossibleMove()) {
+      this.showDialog('info', t('dialog.noMoves.title'), t('dialog.noMoves.text'), null, null, t('btn.ok'));
+      setTimeout(() => {
+        this.closeDialog();
+        this.shuffleBoard();
+      }, 1200);
+    }
+  }
+
+  showDialog(type, title, text, score, actionCallback, actionText, showCloseBtn = true) {
+    const iconEl = document.getElementById('dialog-icon');
+    iconEl.className = 'dialog-icon ' + type;
+    iconEl.textContent = (type === 'success' ? '🏆' : type === 'fail' ? '⚡' : '💬');
+
+    document.getElementById('dialog-title').textContent = title;
+    document.getElementById('dialog-text').textContent = text;
+
+    const scoreEl = document.getElementById('dialog-score');
+    if (score !== null && score !== undefined) {
+      scoreEl.style.display = 'block';
+      scoreEl.textContent = score.toLocaleString();
+    } else {
+      scoreEl.style.display = 'none';
+    }
+
+    const closeBtn = document.getElementById('dialog-close-btn');
+    const actionBtn = document.getElementById('dialog-action-btn');
+
+    if (actionCallback) {
+      actionBtn.style.display = 'flex';
+      actionBtn.textContent = actionText;
+      this.modalAction = actionCallback;
+    } else {
+      actionBtn.style.display = actionText ? 'flex' : 'none';
+      if (actionText) {
+        actionBtn.textContent = actionText;
+        this.modalAction = () => this.closeDialog();
+      }
+    }
+
+    closeBtn.style.display = showCloseBtn ? 'flex' : 'none';
+
+    document.getElementById('dialog-overlay').classList.add('active');
+  }
+
+  closeDialog() {
+    document.getElementById('dialog-overlay').classList.remove('active');
+  }
+
+  onDialogAction() {
+    if (this.modalAction) {
+      this.modalAction();
+    }
+    this.closeDialog();
+  }
+
+  updateUI() {
+    const scoreEl = document.getElementById('score');
+    scoreEl.textContent = this.score.toLocaleString();
+
+    document.getElementById('level-badge').textContent = t('level.badge').replace('{level}', this.level);
+    document.getElementById('target').textContent = this.targetScore.toLocaleString();
+    document.getElementById('moves').textContent = this.moves;
+    document.getElementById('matched').textContent = this.matchedCount;
+    document.getElementById('best-combo').textContent = this.bestCombo + 'x';
+
+    const percent = Math.min(100, Math.floor((this.score / this.targetScore) * 100));
+    document.getElementById('progress-fill').style.width = percent + '%';
+    document.getElementById('progress-percent').textContent = percent + '%';
+  }
+
+  restart() {
+    this.score = 0;
+    this.level = 1;
+    this.moves = 30;
+    this.matchedCount = 0;
+    this.bestCombo = 0;
+    this.currentCombo = 0;
+    this.targetScore = 1000;
+    this.selectedGem = null;
+    this.isProcessing = false;
+
+    this.closeDialog();
+    this.initBoard();
+    this.render();
+    this.updateUI();
+  }
+}
+
+const game = new MatchThreeGame();
+window.game = game;
+
+// 点击遮罩关闭对话框
+document.getElementById('dialog-overlay').addEventListener('click', (e) => {
+  if (e.target.id === 'dialog-overlay') {
+    game.closeDialog();
+  }
+});
+
+// ==================== 汉堡菜单 ====================
+const menuBtn = document.getElementById('menu-btn');
+const menuDropdown = document.getElementById('menu-dropdown');
+
+function toggleMenu() {
+  const isOpen = menuDropdown.classList.contains('show');
+  if (isOpen) {
+    menuDropdown.classList.remove('show');
+    menuBtn.classList.remove('active');
+  } else {
+    menuDropdown.classList.add('show');
+    menuBtn.classList.add('active');
+  }
+}
+
+function closeMenu() {
+  menuDropdown.classList.remove('show');
+  menuBtn.classList.remove('active');
+}
+
+menuBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  toggleMenu();
+});
+
+// 点击菜单项后关闭菜单
+document.querySelectorAll('.menu-item').forEach(item => {
+  item.addEventListener('click', () => {
+    closeMenu();
+  });
+});
+
+// 点击页面其他地方关闭菜单
+document.addEventListener('click', (e) => {
+  if (!menuDropdown.contains(e.target) && !menuBtn.contains(e.target)) {
+    closeMenu();
+  }
+});
+
+// 按 Esc 关闭菜单
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeMenu();
+  }
+});
+</script>
+
+</body>
+</html>
