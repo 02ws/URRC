@@ -1,4 +1,4 @@
-# 💎 消消乐 · WinUI 3 风格
+# 💎 FluentGems · Fluent Design 风格消消乐
 
 一款使用 **HTML/CSS/JavaScript** 开发的经典三消游戏，采用 Windows 11 Fluent Design 风格，通过 **Electron** 打包为桌面应用。
 
@@ -6,7 +6,7 @@
   <img src="https://img.shields.io/badge/平台-Windows-blue?style=for-the-badge&logo=windows" />
   <img src="https://img.shields.io/badge/技术-Electron-47848F?style=for-the-badge&logo=electron" />
   <img src="https://img.shields.io/badge/语言-HTML%2FCSS%2FJS-E34F26?style=for-the-badge&logo=html5" />
-  <img src="https://img.shields.io/badge/风格-WinUI%203-0078D4?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/风格-Fluent%20Design-0078D4?style=for-the-badge" />
 </p>
 
 ---
@@ -30,12 +30,12 @@
 
 ### 方式一：下载安装包（推荐）
 
-直接前往 **[Releases 页面](https://github.com/02ws/URRC/releases)** 下载最新版：
+直接前往 **[Releases 页面](https://github.com/02ws/FluentGems/releases)** 下载最新版：
 
 | 版本 | 说明 |
 |------|------|
-| `消消乐 X.X.X.exe` | 免安装版，双击即可运行 |
-| `消消乐 Setup X.X.X.exe` | 安装版，安装到电脑 |
+| `FluentGems X.X.X.exe` | 免安装版，双击即可运行 |
+| `FluentGems Setup X.X.X.exe` | 安装版，安装到电脑 |
 
 ---
 
@@ -50,8 +50,8 @@
 
 ```bash
 # 1. 克隆项目
-git clone https://github.com/02ws/URRC.git
-cd URRC
+git clone https://github.com/02ws/FluentGems.git
+cd FluentGems
 
 # 2. 安装依赖
 npm install
@@ -69,8 +69,8 @@ npm start
 npm run build
 
 # 打包产物位于 dist/ 目录
-#   dist/消消乐 Setup 1.0.0.exe   (安装版)
-#   dist/消消乐 1.0.0.exe         (免安装版)
+#   dist/FluentGems Setup 1.0.0.exe   (安装版)
+#   dist/FluentGems 1.0.0.exe         (免安装版)
 ```
 
 ---
@@ -91,7 +91,7 @@ npm run build
 
 ```
 ┌──────────────────────────────┐
-│  ≡   消消乐          ☀ 🌐    │  ← 菜单 / 主题切换 / 语言切换
+│  ≡  FluentGems        ☀ 🌐   │  ← 菜单 / 主题切换 / 语言切换
 ├──────────────────────────────┤
 │  当前分数                      │
 │  ░░░░░░░░░░░░░░  827 / 1000   │  ← 进度条
@@ -116,7 +116,7 @@ npm run build
 ## 🛠️ 项目结构
 
 ```
-electron-app/
+FluentGems/
 ├── main.js              # Electron 主进程
 ├── preload.js           # 预加载脚本
 ├── xiaoxiaole.html      # 游戏主界面 (HTML + CSS + JS 一体式)
@@ -128,8 +128,8 @@ electron-app/
 ├── 打包.bat              # Windows 快捷打包脚本
 ├── .gitignore           # Git 忽略文件
 └── dist/                # 打包产物 (由 electron-builder 生成)
-    ├── 消消乐 1.0.0.exe
-    ├── 消消乐 Setup 1.0.0.exe
+    ├── FluentGems 1.0.0.exe
+    ├── FluentGems Setup 1.0.0.exe
     └── win-unpacked/
 ```
 

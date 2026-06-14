@@ -1,11 +1,11 @@
 {
-  "name": "gems-xiaoxiaole",
+  "name": "fluentgems",
   "version": "1.0.0",
-  "description": "缤纷消消乐 - WinUI 3 风格桌面游戏",
+  "description": "FluentGems - Fluent Design 风格消消乐游戏",
   "main": "main.js",
-  "author": "Gems Game Studio",
+  "author": "FluentGems Studio",
   "license": "MIT",
-  "keywords": ["electron", "winui3", "game", "match3", "xiaoxiaole"],
+  "keywords": ["electron", "winui3", "fluent-design", "game", "match3", "xiaoxiaole", "gems"],
   "scripts": {
     "start": "electron .",
     "dev": "electron . --enable-logging",
@@ -18,8 +18,8 @@
     "electron-builder": "^24.13.3"
   },
   "build": {
-    "appId": "com.gems.xiaoxiaole",
-    "productName": "消消乐",
+    "appId": "com.fluentgems.game",
+    "productName": "FluentGems",
     "directories": {
       "output": "dist"
     },
@@ -51,7 +51,7 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "消消乐",
+      "shortcutName": "FluentGems",
       "deleteAppDataOnUninstall": false,
       "differentialPackage": true
     }
